@@ -4,29 +4,38 @@ import (
 	"gorm.io/gorm"
 )
 
-type Repository[T any] struct {
-	db *gorm.DB
+type Repository[T any] interface {
+	Create(entity *T) error
+	Update(entity *T) error
+	Delete(id int32) error
+	GetById(id int32) *T
+	GetAll() *T
 }
 
-func NewRepository[T any](db *gorm.DB) *Repository[T] {
-	return &Repository[T]{
+type repository[T any] struct {
+	db *gorm.DB
+	Repository[T]
+}
+
+func GetRepository[T any](db *gorm.DB) Repository[T] {
+	return &repository[T]{
 		db: db,
 	}
 }
 
-func (repository Repository[T]) Create(entity *T) error {
+func (repository repository[T]) Create(entity *T) error {
 	return repository.db.Create(&entity).Error
 }
 
-func (repository Repository[T]) Update(entity *T) error {
+func (repository repository[T]) Update(entity *T) error {
 	return repository.db.Updates(&entity).Error
 }
 
-func (repository Repository[T]) Delete(id int32) error {
+func (repository repository[T]) Delete(id int32) error {
 	return repository.db.Delete("id = ?", id).Error
 }
 
-func (repository Repository[T]) GetById(id int32) *T {
+func (repository repository[T]) GetById(id int32) *T {
 	var entity T
 	err := repository.db.First(&entity, "id = ?", id).Error
 
@@ -37,7 +46,7 @@ func (repository Repository[T]) GetById(id int32) *T {
 	return &entity
 }
 
-func (repository Repository[T]) Get() *T {
+func (repository repository[T]) GetAll() *T {
 	var entities T
 	err := repository.db.Find(&entities).Error
 
