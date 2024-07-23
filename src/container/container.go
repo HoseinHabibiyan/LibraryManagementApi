@@ -12,7 +12,7 @@ type container[T any] struct {
 	repo repository.Repository[T]
 }
 
-func GetContainer[T any](repo repository.Repository[T]) Container[T] {
+func NewContainer[T any](repo repository.Repository[T]) Container[T] {
 	return &container[T]{
 		repo: repo,
 	}
