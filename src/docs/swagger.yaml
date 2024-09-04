@@ -1,17 +1,32 @@
+definitions:
+  domain.Author:
+    type: object
 info:
   contact: {}
 paths:
+  /author/add:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: author
+        in: body
+        name: author
+        required: true
+        schema:
+          $ref: '#/definitions/domain.Author'
+      produces:
+      - application/json
+      responses: {}
+      tags:
+      - Author
   /author/get-all:
     get:
       consumes:
       - application/json
       produces:
       - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: string
+      responses: {}
       tags:
       - Author
 swagger: "2.0"

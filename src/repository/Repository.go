@@ -9,7 +9,7 @@ type Repository[T any] interface {
 	Update(entity *T) error
 	Delete(id int32) error
 	GetById(id int32) *T
-	GetAll() *T
+	GetAll() *[]T
 }
 
 type repository[T any] struct {
@@ -46,8 +46,8 @@ func (repository repository[T]) GetById(id int32) *T {
 	return &entity
 }
 
-func (repository repository[T]) GetAll() *T {
-	var entities T
+func (repository repository[T]) GetAll() *[]T {
+	var entities []T
 	err := repository.db.Find(&entities).Error
 
 	if err != nil {

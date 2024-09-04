@@ -18,4 +18,5 @@ func MapRouter(g *gin.Engine, db *gorm.DB) {
 	// author
 	authorController := controller.NewAuthorController(c)
 	router.GET("/author/get-all", authorController.GetAll)
+	router.POST("/author/add", authorController.Add)
 }
