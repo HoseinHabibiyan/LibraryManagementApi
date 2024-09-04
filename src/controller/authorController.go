@@ -17,6 +17,11 @@ func NewAuthorController(c container.Container[domain.Author]) *AuthorController
 	}
 }
 
+// @Schemes
+// @Tags Author
+// @Accept json
+// @Produce json
+// @Router /author/get-all [get]
 func (c *AuthorController) GetAll(context *gin.Context) {
 	repo := c.container.GetRepository()
 	data := repo.GetAll()

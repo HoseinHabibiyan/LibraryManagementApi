@@ -10,12 +10,12 @@ import (
 )
 
 func MapRouter(g *gin.Engine, db *gorm.DB) {
-	router := g.Group("api")
+	router := g.Group("api/v1")
 
 	author := repository.GetRepository[domain.Author](db)
 	c := container.NewContainer(author)
 
 	// author
 	authorController := controller.NewAuthorController(c)
-	router.GET("/", authorController.GetAll)
+	router.GET("/author/get-all", authorController.GetAll)
 }

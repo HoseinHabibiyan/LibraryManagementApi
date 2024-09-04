@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-
 	cfg := config.GetConfig()
+
 	app.Run(cfg)
 }
