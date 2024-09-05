@@ -4,6 +4,30 @@ definitions:
 info:
   contact: {}
 paths:
+  /author:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses: {}
+      tags:
+      - Author
+  /author/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      tags:
+      - Author
   /author/add:
     post:
       consumes:
@@ -15,15 +39,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/domain.Author'
-      produces:
-      - application/json
-      responses: {}
-      tags:
-      - Author
-  /author/get-all:
-    get:
-      consumes:
-      - application/json
       produces:
       - application/json
       responses: {}

@@ -15,6 +15,20 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/author": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Author"
+                ],
+                "responses": {}
+            }
+        },
         "/author/add": {
             "post": {
                 "consumes": [
@@ -40,7 +54,7 @@ const docTemplate = `{
                 "responses": {}
             }
         },
-        "/author/get-all": {
+        "/author/{id}": {
             "get": {
                 "consumes": [
                     "application/json"
@@ -50,6 +64,15 @@ const docTemplate = `{
                 ],
                 "tags": [
                     "Author"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
                 ],
                 "responses": {}
             }

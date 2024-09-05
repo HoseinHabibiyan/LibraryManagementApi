@@ -5,6 +5,7 @@ import (
 	"lib_management/container"
 	"lib_management/domain"
 	"net/http"
+	"strconv"
 )
 
 type AuthorController struct {
@@ -21,10 +22,23 @@ func NewAuthorController(c container.Container[domain.Author]) *AuthorController
 // @Tags Author
 // @Accept json
 // @Produce json
-// @Router /author/get-all [get]
+// @Router /author [get]
 func (c *AuthorController) GetAll(context *gin.Context) {
 	repo := c.container.GetRepository()
 	data := repo.GetAll()
+	context.JSON(http.StatusOK, data)
+}
+
+// @Schemes
+// @Tags Author
+// @Accept json
+// @Produce json
+// @param id path int true "id"
+// @Router /author/{id} [get]
+func (c *AuthorController) GetById(context *gin.Context) {
+	repo := c.container.GetRepository()
+	id, _ := strconv.Atoi(context.Param("id"))
+	data := repo.GetById(int32(id))
 	context.JSON(http.StatusOK, data)
 }
 

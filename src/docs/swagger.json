@@ -4,6 +4,20 @@
         "contact": {}
     },
     "paths": {
+        "/author": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Author"
+                ],
+                "responses": {}
+            }
+        },
         "/author/add": {
             "post": {
                 "consumes": [
@@ -29,7 +43,7 @@
                 "responses": {}
             }
         },
-        "/author/get-all": {
+        "/author/{id}": {
             "get": {
                 "consumes": [
                     "application/json"
@@ -39,6 +53,15 @@
                 ],
                 "tags": [
                     "Author"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
                 ],
                 "responses": {}
             }
